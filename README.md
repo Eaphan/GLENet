@@ -1,4 +1,5 @@
 # GLENet
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/glenet-boosting-3d-object-detectors-with/3d-object-detection-on-kitti-cars-hard)](https://paperswithcode.com/sota/3d-object-detection-on-kitti-cars-hard?p=glenet-boosting-3d-object-detectors-with) ![visitors](https://visitor-badge.glitch.me/badge?page_id=Eaphan/GLENet)
 ## Overview
 - [Introduction](#introduction)
 - [Installation](#installation)
