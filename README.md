@@ -186,7 +186,16 @@ We provide the pre-trained models for car class on the KITTI dataset.
 
 
 
-
+## Citation
+If you find this work useful in your research, please consider cite:
+```
+@article{zhang2022glenet,
+  title={GLENet: Boosting 3D Object Detectors with Generative Label Uncertainty Estimation},
+  author={Zhang, Yifan and Zhang, Qijian and Zhu, Zhiyu and Hou, Junhui and Yuan, Yixuan},
+  journal={arXiv preprint arXiv:2207.02466},
+  year={2022}
+}
+```
 
 ## License
 `GLENet` is released under the [Apache 2.0 license](LICENSE).
