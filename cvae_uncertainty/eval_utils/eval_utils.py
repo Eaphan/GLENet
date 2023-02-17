@@ -108,9 +108,11 @@ def eval_one_epoch(cfg, model, dataloader, epoch_id, logger, dist_test=False, sa
             "frame_id": batch_dict['frame_id'],
             "gt_id": batch_dict['gt_id'],
             "gt_boxes": batch_dict['gt_boxes'].cpu().numpy(),
-            # "gt_boxes_ori": batch_dict['gt_boxes_ori'].cpu().numpy(),
-            "trans_angle": batch_dict['trans_angle'].cpu().numpy()
+            # "gt_boxes_ori": batch_dict['gt_boxes_ori'].cpu().numpy()
         }
+
+        if 'waymo' in cfg.TAG:
+            single_result['trans_angle'] = batch_dict['trans_angle'].cpu().numpy()
 
         det_annos += [single_result]
         if cfg.LOCAL_RANK == 0:

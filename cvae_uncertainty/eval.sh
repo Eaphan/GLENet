@@ -3,7 +3,7 @@ tag=debug # fsr_e1600 fsr_64
 epoch=400
 gpu=3
 
-save_path=/home/yifanzhang/workspace/cvae_uncertainty/output/${exp_id}/${tag}/eval/epoch_${epoch}/val/default/final_result/data
+save_path=output/${exp_id}/${tag}/eval/epoch_${epoch}/val/default/final_result/data
 
 for iter in `seq 1 30`;do
      CUDA_VISIBLE_DEVICES=${gpu} python test.py --cfg_file cfgs/${exp_id}.yaml --extra_tag ${tag} \

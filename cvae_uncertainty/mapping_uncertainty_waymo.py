@@ -31,8 +31,8 @@ def single_fold_data(fold_idx):
     epoch='40'
     result_data_list = []
 
-    file_list = os.listdir(f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/')
-    file_list = [f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/' + x for x in file_list if 'result_val' in x]
+    file_list = os.listdir(f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/')
+    file_list = [f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/' + x for x in file_list if 'result_val' in x]
 
     print(f"For fold={fold_idx}, len of file_list= ", len(file_list))
 

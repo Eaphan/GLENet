@@ -19,7 +19,7 @@ with open('kitti/kitti_dbinfos_val.pkl', 'rb') as f:
 
 # import pdb;pdb.set_trace()
 
-# '/home/yifanzhang/workspace/cvae_uncertainty/output/exp2/noshift/eval/epoch_80/val/default/final_result/data/result_val1.pkl',
+# 'output/exp2/noshift/eval/epoch_80/val/default/final_result/data/result_val1.pkl',
 
 import sys
 
@@ -32,20 +32,20 @@ epoch=sys.argv[3]
 
 result_data_list = []
 
-file_list = os.listdir(f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/')
-file_list = [f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/' + x for x in file_list if 'result_val' in x]
+file_list = os.listdir(f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/')
+file_list = [f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/' + x for x in file_list if 'result_val' in x]
 
 # for file in [
-#     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val1.pkl',
-#     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val2.pkl',
-#     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val3.pkl',
-#     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val4.pkl',
-#     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val5.pkl',
-#     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val6.pkl',
-#     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val7.pkl',
-#     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val8.pkl',
-#     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val9.pkl',
-#     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val10.pkl'    
+#     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val1.pkl',
+#     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val2.pkl',
+#     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val3.pkl',
+#     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val4.pkl',
+#     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val5.pkl',
+#     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val6.pkl',
+#     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val7.pkl',
+#     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val8.pkl',
+#     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val9.pkl',
+#     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val10.pkl'    
 # ]:
 for file in file_list:
     with open(file, 'rb') as f:

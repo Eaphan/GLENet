@@ -113,7 +113,7 @@ ln -s  data/kitti cvae_uncertainty <br>
 ln -s  data/waymo cvae_uncertainty <br>
 ### step1.1: Train GLENet:
 ```
-cd cvae_uncertainty/tools;
+cd cvae_uncertainty;mkdir -p logs;
 exp_id=exp20 # you can set other exp_id
 for iter in `seq 0 9`;do
     sed "s@# FOLD_IDX: 0@FOLD_IDX: ${iter}@" cfgs/${exp_id}_gen_ori.yaml > cfgs/${exp_id}_gen.yaml
@@ -123,7 +123,7 @@ done
 ```
 ### step 1.2: GLENet Prediction:
 ```
-cd cvae_uncertainty/tools;
+cd cvae_uncertainty;
 exp_id=exp20
 for iter in `seq 0 9`;do
     sed "s@# FOLD_IDX: 0@FOLD_IDX: ${iter}@" cfgs/${exp_id}_gen_ori.yaml > cfgs/${exp_id}_gen.yaml
@@ -132,6 +132,7 @@ for iter in `seq 0 9`;do
 done
 ```
 ### step 1.3: Generate and Save Label Uncertainty
+* mkdir -p output/uncertainty_dump
 * python mapping_uncertainty.py
 * python change_gt_infos.py
 

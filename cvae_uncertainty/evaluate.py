@@ -16,7 +16,7 @@ with open('kitti/kitti_dbinfos_val.pkl', 'rb') as f:
 
 # import pdb;pdb.set_trace()
 
-# '/home/yifanzhang/workspace/cvae_uncertainty/output/exp2/noshift/eval/epoch_80/val/default/final_result/data/result_val1.pkl',
+# 'output/exp2/noshift/eval/epoch_80/val/default/final_result/data/result_val1.pkl',
 
 import sys
 
@@ -35,11 +35,11 @@ result_data_list = []
 # epoch='400'
 # epoch='4'
 for file in [
-    f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val1.pkl',
-    f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val2.pkl',
-    f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val3.pkl',
-    f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val4.pkl',
-    f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val5.pkl'
+    f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val1.pkl',
+    f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val2.pkl',
+    f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val3.pkl',
+    f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val4.pkl',
+    f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val5.pkl'
 ]:
 
     with open(file, 'rb') as f:

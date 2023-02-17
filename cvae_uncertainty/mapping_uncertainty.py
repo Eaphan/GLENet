@@ -22,7 +22,7 @@ from tqdm import tqdm
 with open('kitti/kitti_dbinfos_train.pkl', 'rb') as f:
     db_infos = pickle.load(f)
 
-# '/home/yifanzhang/workspace/cvae_uncertainty/output/exp2/noshift/eval/epoch_80/val/default/final_result/data/result_val1.pkl',
+# 'output/exp2/noshift/eval/epoch_80/val/default/final_result/data/result_val1.pkl',
 
 
 exp='exp20_gen'
@@ -34,22 +34,22 @@ def single_fold_data(fold_idx):
     epoch='400'
     result_data_list = []
 
-    file_list = os.listdir(f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/')
-    file_list = [f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/' + x for x in file_list if 'result_val' in x]
+    file_list = os.listdir(f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/')
+    file_list = [f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/' + x for x in file_list if 'result_val' in x]
     print(f"For fold={fold_idx}, len of file_list= ", len(file_list))
 
     for file in file_list:
     # for file in [
-    #     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val1.pkl',
-    #     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val2.pkl',
-    #     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val3.pkl',
-    #     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val4.pkl',
-    #     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val5.pkl',
-    #     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val6.pkl',
-    #     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val7.pkl',
-    #     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val8.pkl',
-    #     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val9.pkl',
-    #     f'/home/yifanzhang/workspace/cvae_uncertainty/output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val10.pkl'
+    #     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val1.pkl',
+    #     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val2.pkl',
+    #     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val3.pkl',
+    #     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val4.pkl',
+    #     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val5.pkl',
+    #     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val6.pkl',
+    #     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val7.pkl',
+    #     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val8.pkl',
+    #     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val9.pkl',
+    #     f'output/{exp}/{tag}/eval/epoch_{epoch}/val/default/final_result/data/result_val10.pkl'
     # ]:
 
         with open(file, 'rb') as f:
@@ -64,9 +64,11 @@ def single_fold_data(fold_idx):
     # car_info = db_infos['Car']
 
     splits=KFold(n_splits=10,shuffle=True,random_state=42)
-    train_idx, val_idx = [x for x in splits.split(np.arange(len(db_infos['Car'])))][fold_idx]
+    # ad hoc, you should change if you forbid enable_similar_type
+    used_infos = db_infos['Car'] + db_infos['Van']
+    train_idx, val_idx = [x for x in splits.split(np.arange(len(used_infos)))][fold_idx]
 
-    car_info = [db_infos['Car'][idx] for idx in val_idx]    
+    car_info = [used_infos[idx] for idx in val_idx]    
 
     # import pdb;pdb.set_trace()
     # choices = np.random.choice(len(car_info), 1500)
@@ -82,12 +84,16 @@ def single_fold_data(fold_idx):
         pc_data = np.fromfile(pc_path, dtype=np.float32).reshape(-1, 4)
         pc_data_num = len(pc_data)
 
-        try:
-            overlap_list = [r[key]['overlap'] for r in result_data_list]
-            over_lap_mean = np.mean(overlap_list)
-        except:
-            print(f"not found key={key} data.shape={pc_data_num}")
-            # import pdb;pdb.set_trace()
+        # try:
+        #     overlap_list = [r[key]['overlap'] for r in result_data_list]
+        #     over_lap_mean = np.mean(overlap_list)
+        #     overlap_l.append(over_lap_mean)
+        # except:
+        #     print(f"not found key={key} data.shape={pc_data_num}")
+        #     # import pdb;pdb.set_trace()
+        #     continue
+        if key not in result_data_list[0]:
+            print("unfound key", key)
             continue
 
         pred_box_list = [r[key]['pred_box'] for r in result_data_list]
@@ -115,8 +121,6 @@ def single_fold_data(fold_idx):
 
         key_l.append(key)
         pointnum_l.append(pc_data_num)
-        overlap_l.append(over_lap_mean)
-        # variance_l.append(variance_mean)
         variance_l.append(variance_list)
     return key_l, pointnum_l, overlap_l, variance_l
 
