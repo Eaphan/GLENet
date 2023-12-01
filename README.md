@@ -194,7 +194,7 @@ If you find this work useful in your research, please consider citing:
 	title={GLENet: Boosting 3D object detectors with generative label uncertainty estimation},
 	author={Zhang, Yifan and Zhang, Qijian and Zhu, Zhiyu and Hou, Junhui and Yuan, Yixuan},
 	journal={International Journal of Computer Vision},
-	pages={1--21},
+	pages={3332--3352},
 	year={2023},
 }
 ```
